@@ -50,6 +50,7 @@ function Login() {
         }
         localStorage.setItem("userName", data.user); // Store name
         localStorage.setItem("userEmail", data.email); // Store email for password change
+        localStorage.setItem("userRole", data.role); // Store role
         localStorage.setItem("jwtToken", data.token); // Store token
         navigate("/dashboard");
       } else {

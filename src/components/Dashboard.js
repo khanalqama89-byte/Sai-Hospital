@@ -11,6 +11,7 @@ import ChangePassword from "./ChangePassword";
 
 function Dashboard() {
   const navigate = useNavigate();
+  const userRole = localStorage.getItem("userRole") || "DOCTOR"; // Default to DOCTOR or just ""
   // Read active tab from localStorage if it exists, default to 'appointments'
   const [activePage, setActivePage] = useState(localStorage.getItem("adminActiveTab") || "appointments");
   const [appointments, setAppointments] = useState([]);
@@ -1279,6 +1280,10 @@ Date: ${formatDate(record.appointmentDate)}`;
       return renderPatientsTab();
     }
     if (activePage === "staff" || activePage === "staff_list" || activePage.startsWith("staff_") || activePage === "add_staff") {
+      if (userRole !== "DOCTOR") {
+        setActivePage("appointments");
+        return null;
+      }
       if (activePage === "staff_logs") {
         return (
           <div className="lab-admin-container" style={{ padding: '0', background: 'transparent', boxShadow: 'none' }}>
@@ -1511,16 +1516,18 @@ Date: ${formatDate(record.appointmentDate)}`;
             </div>
           </div>
 
-          <div className="nav-group">
-            <div className="nav-header">
-              <i className="fa-solid fa-users-gear"></i> Staff
+          {userRole === "DOCTOR" && (
+            <div className="nav-group">
+              <div className="nav-header">
+                <i className="fa-solid fa-users-gear"></i> Staff
+              </div>
+              <div className="nav-sub-items">
+                <a onClick={() => setActivePage("add_staff")}>Add Staff</a>
+                <a onClick={() => setActivePage("staff_list")}>Staff List</a>
+                <a onClick={() => setActivePage("staff_logs")}>Activity Logs</a>
+              </div>
             </div>
-            <div className="nav-sub-items">
-              <a onClick={() => setActivePage("add_staff")}>Add Staff</a>
-              <a onClick={() => setActivePage("staff_list")}>Staff List</a>
-              <a onClick={() => setActivePage("staff_logs")}>Activity Logs</a>
-            </div>
-          </div>
+          )}
 
           <div className="nav-group">
             <div className="nav-header">
