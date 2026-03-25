@@ -69,7 +69,7 @@ function TeamDirectory({ staffMembers, onBack, staffSearch, setStaffSearch, refr
 
     React.useEffect(() => {
         if (refreshStaff) refreshStaff();
-    }, []);
+    }, [refreshStaff]);
 
     // ... (rest of the functions remain same)
 
@@ -134,18 +134,7 @@ function TeamDirectory({ staffMembers, onBack, staffSearch, setStaffSearch, refr
         return name.substring(0, 2).toUpperCase();
     };
 
-    const formatDate = (dateStr) => {
-        if (!dateStr) return "Never";
-        const date = new Date(dateStr);
-        return date.toLocaleString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-        });
-    };
+    // formatDate removed as it was unused
 
     return (
         <div className="team-directory-wrapper">

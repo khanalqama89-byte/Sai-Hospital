@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import API_BASE_URL from "../apiConfig";
@@ -103,7 +103,7 @@ function LabAdmin({ onBack, activeSubTab }) {
     );
   };
 
-  const fetchRecords = async () => {
+  const fetchRecords = useCallback(async () => {
     try {
       const token = localStorage.getItem("jwtToken");
       const response = await fetch(`${API_BASE_URL}/api/lab-records`, {
@@ -118,11 +118,11 @@ function LabAdmin({ onBack, activeSubTab }) {
     } catch (error) {
       console.error("Failed to fetch records:", error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchRecords();
-  }, []);
+  }, [fetchRecords]);
 
   const handleTimeChange = (e) => {
     const { name, value } = e.target;
@@ -491,7 +491,6 @@ function LabAdmin({ onBack, activeSubTab }) {
             <div className="lab-test-list-grid">
               {filteredProfiles.map((tp, pIndex) => {
                 const isExpanded = expandedProfiles.includes(tp.profile);
-                const allSelected = tp.tests.every(t => selectedTests.includes(t));
                 const someSelected = tp.tests.some(t => selectedTests.includes(t));
 
                 return (

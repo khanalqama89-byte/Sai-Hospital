@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import API_BASE_URL from "../apiConfig";
@@ -38,8 +38,8 @@ function IpdAdmin({ onBack, activeSubTab }) {
     const [admittedDateFilter, setAdmittedDateFilter] = useState("");
 
     // Filters - Discharged
-    const [dischargedSearch, setDischargedSearch] = useState("");
-    const [dischargedDateFilter, setDischargedDateFilter] = useState("");
+    const [dischargedSearch] = useState("");
+    const [dischargedDateFilter] = useState("");
 
     // Filters - All IPD Records
     const [allSearch, setAllSearch] = useState("");
@@ -47,9 +47,9 @@ function IpdAdmin({ onBack, activeSubTab }) {
 
     useEffect(() => {
         fetchIpdRecords();
-    }, []);
+    }, [fetchIpdRecords]);
 
-    const fetchIpdRecords = async () => {
+    const fetchIpdRecords = useCallback(async () => {
         try {
             const token = localStorage.getItem("jwtToken");
             const res = await fetch(`${API_BASE_URL}/api/ipd`, {
@@ -62,7 +62,7 @@ function IpdAdmin({ onBack, activeSubTab }) {
         } catch (err) {
             console.error("Failed to load IPD records:", err);
         }
-    };
+    }, []);
 
     const handleAdmit = async (e) => {
         e.preventDefault();
@@ -228,12 +228,7 @@ function IpdAdmin({ onBack, activeSubTab }) {
         return matchSearch && matchDate;
     });
 
-    const dischargedPatients = ipdRecords.filter(r => r.status === "DISCHARGED").filter(r => {
-        const matchSearch = (r.patientName || "").toLowerCase().includes(dischargedSearch.toLowerCase()) ||
-            (r.disease || "").toLowerCase().includes(dischargedSearch.toLowerCase());
-        const matchDate = dischargedDateFilter ? ((r.admissionDate && r.admissionDate.startsWith(dischargedDateFilter)) || (r.dischargeDate && r.dischargeDate.startsWith(dischargedDateFilter))) : true;
-        return matchSearch && matchDate;
-    });
+    // dischargedPatients removed as it was unused
 
     const allPatients = ipdRecords.filter(r => {
         const matchSearch = (r.patientName || "").toLowerCase().includes(allSearch.toLowerCase()) ||
@@ -264,7 +259,7 @@ function IpdAdmin({ onBack, activeSubTab }) {
     };
 
     const totalAdmittedCount = ipdRecords.filter(r => r.status === "ADMITTED").length;
-    const totalDischargedCount = ipdRecords.filter(r => r.status === "DISCHARGED").length;
+    // totalDischargedCount removed as it was unused
 
     const formatDate = (dateString) => {
         if (!dateString) return "-";

@@ -65,8 +65,6 @@ function Appointment() {
 
   // Set default time on mount
   useEffect(() => {
-    const hours24 = 10;
-    const minute = "00";
     setFormData(prev => ({
       ...prev,
       appointmentTime: "10:00"

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import API_BASE_URL from "../apiConfig";
 import jsPDF from "jspdf";
@@ -37,7 +37,7 @@ function Dashboard() {
 
   // Filters for Rejected Patients
   const [rejectedSearch, setRejectedSearch] = useState("");
-  const [rejectedDateFilter, setRejectedDateFilter] = useState("");
+  const [rejectedDateFilter] = useState("");
 
   // Filters for Staff Activity Logs
   const [logSearch, setLogSearch] = useState("");
@@ -62,7 +62,12 @@ function Dashboard() {
   }, []);
 
   /* ---------------- LOAD APPOINTMENTS ---------------- */
-  const fetchAppointments = async () => {
+  const handleAuthError = useCallback(() => {
+    localStorage.removeItem("jwtToken");
+    navigate("/admin");
+  }, [navigate]);
+
+  const fetchAppointments = useCallback(async () => {
     try {
       const token = localStorage.getItem("jwtToken");
       const res = await fetch(`${API_BASE_URL}/api/appointments`, {
@@ -79,7 +84,7 @@ function Dashboard() {
     } catch (err) {
       console.error("Failed to load appointments:", err);
     }
-  };
+  }, [handleAuthError]);
 
   /* ---------------- EXPORT & SHARE ---------------- */
   const exportToPDF = (records) => {
@@ -151,7 +156,7 @@ Date: ${formatDate(record.appointmentDate)}`;
     }
   };
 
-  const fetchStaffMembers = async () => {
+  const fetchStaffMembers = useCallback(async () => {
     try {
       const token = localStorage.getItem("jwtToken");
       const res = await fetch(`${API_BASE_URL}/api/users`, {
@@ -164,11 +169,11 @@ Date: ${formatDate(record.appointmentDate)}`;
         handleAuthError();
       }
     } catch (err) {
-      console.error("Failed to load staff members:", err);
+      console.warn("Failed to load staff members:", err);
     }
-  };
+  }, [handleAuthError]);
 
-  const fetchLabRecords = async () => {
+  const fetchLabRecords = useCallback(async () => {
     try {
       const token = localStorage.getItem("jwtToken");
       const res = await fetch(`${API_BASE_URL}/api/lab-records`, {
@@ -183,9 +188,9 @@ Date: ${formatDate(record.appointmentDate)}`;
     } catch (err) {
       console.error("Failed to load lab records:", err);
     }
-  };
+  }, [handleAuthError]);
 
-  const fetchIpdRecords = async () => {
+  const fetchIpdRecords = useCallback(async () => {
     try {
       const token = localStorage.getItem("jwtToken");
       const res = await fetch(`${API_BASE_URL}/api/ipd`, {
@@ -200,9 +205,9 @@ Date: ${formatDate(record.appointmentDate)}`;
     } catch (err) {
       console.error("Failed to load IPD records:", err);
     }
-  };
+  }, [handleAuthError]);
 
-  const fetchActivityLogs = async () => {
+  const fetchActivityLogs = useCallback(async () => {
     try {
       const token = localStorage.getItem("jwtToken");
       const res = await fetch(`${API_BASE_URL}/api/activity-logs`, {
@@ -215,12 +220,9 @@ Date: ${formatDate(record.appointmentDate)}`;
     } catch (err) {
       console.error("Failed to load activity logs:", err);
     }
-  };
+  }, [handleAuthError]);
 
-  const handleAuthError = () => {
-    localStorage.removeItem("jwtToken");
-    navigate("/admin");
-  };
+  // handleAuthError moved above fetch functions
 
   useEffect(() => {
     fetchAppointments();
@@ -228,7 +230,7 @@ Date: ${formatDate(record.appointmentDate)}`;
     fetchLabRecords();
     fetchIpdRecords();
     fetchActivityLogs();
-  }, []);
+  }, [fetchAppointments, fetchStaffMembers, fetchLabRecords, fetchIpdRecords, fetchActivityLogs]);
 
   // Save active tab to localStorage whenever it changes
   useEffect(() => {
@@ -325,16 +327,7 @@ Date: ${formatDate(record.appointmentDate)}`;
     return l.action === 'LOGIN' && l.timestamp?.startsWith(today);
   }).length;
 
-  const getActionIcon = (action) => {
-    switch (action) {
-      case 'LOGIN': return <i className="fa-solid fa-right-to-bracket"></i>;
-      case 'LOGOUT': return <i className="fa-solid fa-right-from-bracket"></i>;
-      case 'REGISTRATION': return <i className="fa-solid fa-user-plus"></i>;
-      case 'UPDATE': return <i className="fa-solid fa-pen-to-square"></i>;
-      case 'DELETE': return <i className="fa-solid fa-trash-can"></i>;
-      default: return <i className="fa-solid fa-bolt"></i>;
-    }
-  };
+  // getActionIcon removed as it was unused
 
   const getActionClass = (action) => {
     if (!action) return 'action-default';
@@ -1469,7 +1462,7 @@ Date: ${formatDate(record.appointmentDate)}`;
         <h2 className="sidebar-logo">Sai Hospital</h2>
         <nav className="hierarchical-nav">
           <div className="nav-group">
-            <a onClick={() => handleNavClick("appointments")} className={activePage === "appointments" ? "active" : ""}>
+            <a href="#!" onClick={() => handleNavClick("appointments")} className={activePage === "appointments" ? "active" : ""}>
               <i className="fa-solid fa-gauge"></i> Dashboard
             </a>
           </div>
@@ -1479,9 +1472,9 @@ Date: ${formatDate(record.appointmentDate)}`;
               <i className="fa-solid fa-hospital-user"></i> Patients
             </div>
             <div className="nav-sub-items">
-              <a onClick={() => handleNavClick("patients_pending")}>Pending Patients</a>
-              <a onClick={() => handleNavClick("patients_approved")}>Approved Patients</a>
-              <a onClick={() => handleNavClick("patients_rejected")}>Rejected Patients</a>
+              <a href="#!" onClick={() => handleNavClick("patients_pending")}>Pending Patients</a>
+              <a href="#!" onClick={() => handleNavClick("patients_approved")}>Approved Patients</a>
+              <a href="#!" onClick={() => handleNavClick("patients_rejected")}>Rejected Patients</a>
             </div>
           </div>
 
@@ -1490,7 +1483,7 @@ Date: ${formatDate(record.appointmentDate)}`;
               <i className="fa-solid fa-calendar-check"></i> Appointments
             </div>
             <div className="nav-sub-items">
-              <a onClick={() => setActivePage("appointments_completed")}>Completed Appointments</a>
+              <a href="#!" onClick={() => setActivePage("appointments_completed")}>Completed Appointments</a>
             </div>
           </div>
 
@@ -1499,9 +1492,9 @@ Date: ${formatDate(record.appointmentDate)}`;
               <i className="fa-solid fa-bed-pulse"></i> IPD
             </div>
             <div className="nav-sub-items">
-              <a onClick={() => setActivePage("ipd_new")}>New Admissions</a>
-              <a onClick={() => setActivePage("ipd_admitted")}>Admitted Patients</a>
-              <a onClick={() => setActivePage("ipd_records")}>IPD Records</a>
+              <a href="#!" onClick={() => setActivePage("ipd_new")}>New Admissions</a>
+              <a href="#!" onClick={() => setActivePage("ipd_admitted")}>Admitted Patients</a>
+              <a href="#!" onClick={() => setActivePage("ipd_records")}>IPD Records</a>
             </div>
           </div>
 
@@ -1510,9 +1503,9 @@ Date: ${formatDate(record.appointmentDate)}`;
               <i className="fa-solid fa-flask-vial"></i> Laboratory
             </div>
             <div className="nav-sub-items">
-              <a onClick={() => setActivePage("lab_requests")}>Test Requests</a>
-              <a onClick={() => setActivePage("lab_pending")}>Pending Reports</a>
-              <a onClick={() => setActivePage("lab_completed")}>Completed Reports</a>
+              <a href="#!" onClick={() => setActivePage("lab_requests")}>Test Requests</a>
+              <a href="#!" onClick={() => setActivePage("lab_pending")}>Pending Reports</a>
+              <a href="#!" onClick={() => setActivePage("lab_completed")}>Completed Reports</a>
             </div>
           </div>
 
@@ -1522,9 +1515,9 @@ Date: ${formatDate(record.appointmentDate)}`;
                 <i className="fa-solid fa-users-gear"></i> Staff
               </div>
               <div className="nav-sub-items">
-                <a onClick={() => setActivePage("add_staff")}>Add Staff</a>
-                <a onClick={() => setActivePage("staff_list")}>Staff List</a>
-                <a onClick={() => setActivePage("staff_logs")}>Activity Logs</a>
+                <a href="#!" onClick={() => setActivePage("add_staff")}>Add Staff</a>
+                <a href="#!" onClick={() => setActivePage("staff_list")}>Staff List</a>
+                <a href="#!" onClick={() => setActivePage("staff_logs")}>Activity Logs</a>
               </div>
             </div>
           )}
@@ -1534,13 +1527,13 @@ Date: ${formatDate(record.appointmentDate)}`;
               <i className="fa-solid fa-shield-halved"></i> Security
             </div>
             <div className="nav-sub-items">
-              <a onClick={() => handleNavClick("change_password")}>Change Password</a>
+              <a href="#!" onClick={() => handleNavClick("change_password")}>Change Password</a>
             </div>
           </div>
 
 
           <div className="nav-group no-header" style={{ marginTop: 'auto' }}>
-            <a onClick={handleLogout} className="logout-link">
+            <a href="#!" onClick={handleLogout} className="logout-link">
               <i className="fa-solid fa-right-from-bracket"></i> Logout
             </a>
           </div>
