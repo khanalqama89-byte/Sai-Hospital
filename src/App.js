@@ -41,13 +41,13 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/appointment" element={<Appointment />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/appointment" element={<Appointment setIsLoading={setIsLoading} />} />
+          <Route path="/login" element={<Login setIsLoading={setIsLoading} />} />
           <Route path="/dashboard" element={<Dashboard setIsLoading={setIsLoading} />} />
           <Route path="/facility" element={<Facility />} />
           <Route path="/symptoms" element={<Symptoms />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/admin" element={<Login />} />
+          <Route path="/admin" element={<Login setIsLoading={setIsLoading} />} />
         </Routes>
       </main>
 

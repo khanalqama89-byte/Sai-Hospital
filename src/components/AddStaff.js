@@ -1,7 +1,7 @@
 import { useState } from "react";
 import API_BASE_URL from "../apiConfig";
 
-function AddStaff({ onBack, refreshStaff }) {
+function AddStaff({ onBack, refreshStaff, setIsLoading }) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -23,7 +23,7 @@ function AddStaff({ onBack, refreshStaff }) {
         e.preventDefault();
         setSuccessMsg("");
         setErrorMsg("");
-        setLoading(true);
+        if (setIsLoading) setIsLoading(true);
 
         try {
             const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
@@ -35,7 +35,7 @@ function AddStaff({ onBack, refreshStaff }) {
             });
 
             const data = await response.json();
-            setLoading(false);
+            if (setIsLoading) setIsLoading(false);
 
             if (response.ok && data.success) {
                 setSuccessMsg("Staff member successfully registered!");
@@ -45,7 +45,7 @@ function AddStaff({ onBack, refreshStaff }) {
                 setErrorMsg(data.message || "Registration failed");
             }
         } catch (err) {
-            setLoading(false);
+            if (setIsLoading) setIsLoading(false);
             console.error("Signup error:", err);
             setErrorMsg("Failed to connect to the server.");
         }

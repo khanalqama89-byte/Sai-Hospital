@@ -4,7 +4,7 @@ import autoTable from "jspdf-autotable";
 import API_BASE_URL from "../apiConfig";
 import "../App.css";
 
-function IpdAdmin({ onBack, activeSubTab }) {
+function IpdAdmin({ onBack, activeSubTab, setIsLoading }) {
     const [ipdRecords, setIpdRecords] = useState([]);
 
 
@@ -66,6 +66,7 @@ function IpdAdmin({ onBack, activeSubTab }) {
 
     const handleAdmit = async (e) => {
         e.preventDefault();
+        if (setIsLoading) setIsLoading(true);
         try {
             const token = localStorage.getItem("jwtToken");
 
@@ -94,6 +95,8 @@ function IpdAdmin({ onBack, activeSubTab }) {
             }
         } catch (err) {
             console.error("Failed to admit patient", err);
+        } finally {
+            if (setIsLoading) setIsLoading(false);
         }
     };
 
@@ -104,6 +107,7 @@ function IpdAdmin({ onBack, activeSubTab }) {
 
     const handleDischarge = async (e) => {
         e.preventDefault();
+        if (setIsLoading) setIsLoading(true);
         try {
             const token = localStorage.getItem("jwtToken");
             const res = await fetch(`${API_BASE_URL}/api/ipd/discharge/${selectedRecord.id}`, {
@@ -122,6 +126,8 @@ function IpdAdmin({ onBack, activeSubTab }) {
             }
         } catch (err) {
             console.error("Failed to discharge patient", err);
+        } finally {
+            if (setIsLoading) setIsLoading(false);
         }
     };
 

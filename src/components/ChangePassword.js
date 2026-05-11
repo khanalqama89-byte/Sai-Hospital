@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import API_BASE_URL from "../apiConfig";
 
-function ChangePassword({ onBack }) {
+function ChangePassword({ onBack, setIsLoading }) {
     const [step, setStep] = useState(1); // 1: Send OTP, 2: Verify & Reset
     const [email, setEmail] = useState("");
     const [otp, setOtp] = useState("");
@@ -28,6 +28,7 @@ function ChangePassword({ onBack }) {
         }
 
         setLoading(true);
+        if (setIsLoading) setIsLoading(true);
         setMessage({ type: "", text: "" });
 
         try {
@@ -48,6 +49,7 @@ function ChangePassword({ onBack }) {
             setMessage({ type: "error", text: "Server error. Please try again." });
         } finally {
             setLoading(false);
+            if (setIsLoading) setIsLoading(false);
         }
     };
 
@@ -59,6 +61,7 @@ function ChangePassword({ onBack }) {
         }
 
         setLoading(true);
+        if (setIsLoading) setIsLoading(true);
         setMessage({ type: "", text: "" });
 
         try {
@@ -82,6 +85,7 @@ function ChangePassword({ onBack }) {
             setMessage({ type: "error", text: "Server error. Please try again." });
         } finally {
             setLoading(false);
+            if (setIsLoading) setIsLoading(false);
         }
     };
 

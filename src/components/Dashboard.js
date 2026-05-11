@@ -1415,7 +1415,7 @@ Date: ${formatDate(record.appointmentDate)}`;
       }
 
       if (activePage === "add_staff") {
-        return <AddStaff onBack={() => { setActivePage("staff_list"); fetchStaffMembers(); }} refreshStaff={fetchStaffMembers} />;
+        return <AddStaff onBack={() => { setActivePage("staff_list"); fetchStaffMembers(); }} refreshStaff={fetchStaffMembers} setIsLoading={setIsLoading} />;
       }
 
       const category = activePage === "staff_list" ? "all" : activePage.replace('staff_', '');
@@ -1433,11 +1433,11 @@ Date: ${formatDate(record.appointmentDate)}`;
     }
 
     if (activePage === "lab" || activePage.startsWith("lab_")) {
-      return <LabAdmin onBack={() => setActivePage("appointments")} activeSubTab={activePage} />;
+      return <LabAdmin onBack={() => setActivePage("appointments")} activeSubTab={activePage} setIsLoading={setIsLoading} />;
     }
 
     if (activePage === "ipd" || activePage.startsWith("ipd_")) {
-      return <IpdAdmin onBack={() => setActivePage("appointments")} activeSubTab={activePage} />;
+      return <IpdAdmin onBack={() => setActivePage("appointments")} activeSubTab={activePage} setIsLoading={setIsLoading} />;
     }
 
 
@@ -1459,7 +1459,7 @@ Date: ${formatDate(record.appointmentDate)}`;
     }
 
     if (activePage === "change_password") {
-      return <ChangePassword onBack={() => setActivePage("appointments")} />;
+      return <ChangePassword onBack={() => setActivePage("appointments")} setIsLoading={setIsLoading} />;
     }
 
     return null;

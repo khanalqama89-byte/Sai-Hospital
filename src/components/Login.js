@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import API_BASE_URL from "../apiConfig";
 
-function Login() {
+function Login({ setIsLoading }) {
   const navigate = useNavigate();
 
   const [showForgot, setShowForgot] = useState(false);
@@ -32,6 +32,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (setIsLoading) setIsLoading(true);
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
@@ -60,6 +61,8 @@ function Login() {
     } catch (err) {
       console.error("Login error:", err);
       alert("Failed to connect to the server.");
+    } finally {
+      if (setIsLoading) setIsLoading(false);
     }
   };
 
@@ -72,7 +75,7 @@ function Login() {
       return;
     }
 
-    setLoading(true);
+    if (setIsLoading) setIsLoading(true);
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/auth/forgot-password`, {
@@ -82,7 +85,7 @@ function Login() {
       });
 
       const data = await response.json();
-      setLoading(false);
+      if (setIsLoading) setIsLoading(false);
 
       if (response.ok && data.success) {
         setResetMessage(data.message);
@@ -91,7 +94,7 @@ function Login() {
         alert(data.message || "Failed to send reset link");
       }
     } catch (err) {
-      setLoading(false);
+      if (setIsLoading) setIsLoading(false);
       console.error("Forgot password error:", err);
       alert("Failed to connect to the server.");
     }
@@ -104,7 +107,7 @@ function Login() {
       return;
     }
 
-    setLoading(true);
+    if (setIsLoading) setIsLoading(true);
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/auth/reset-password`, {
@@ -118,7 +121,7 @@ function Login() {
       });
 
       const data = await response.json();
-      setLoading(false);
+      if (setIsLoading) setIsLoading(false);
 
       if (response.ok && data.success) {
         setShowForgot(false);

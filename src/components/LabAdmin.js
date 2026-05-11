@@ -3,7 +3,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import API_BASE_URL from "../apiConfig";
 
-function LabAdmin({ onBack, activeSubTab }) {
+function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
 
   const testProfiles = [
     { profile: "Allergy Profile", tests: ["IgE Total"] },
@@ -136,6 +136,7 @@ function LabAdmin({ onBack, activeSubTab }) {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    if (setIsLoading) setIsLoading(true);
 
     if (selectedTests.length === 0) {
       alert("Please select at least one test.");
@@ -210,6 +211,8 @@ function LabAdmin({ onBack, activeSubTab }) {
     } catch (error) {
       console.error("Error saving record:", error);
       alert("Error connecting to server");
+    } finally {
+      if (setIsLoading) setIsLoading(false);
     }
   };
 

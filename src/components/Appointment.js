@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import API_BASE_URL from "../apiConfig";
 
-function Appointment() {
+function Appointment({ setIsLoading }) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -73,6 +73,7 @@ function Appointment() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (setIsLoading) setIsLoading(true);
 
     try {
       const token = localStorage.getItem("jwtToken");
@@ -116,6 +117,8 @@ function Appointment() {
     } catch (err) {
       console.error("Error saving appointment:", err);
       alert("Could not connect to the server.");
+    } finally {
+      if (setIsLoading) setIsLoading(false);
     }
   };
 
