@@ -3094,7 +3094,7 @@ button {
   padding: 20px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
   position: relative;
-  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-header-section {
@@ -3933,6 +3933,18 @@ button {
 @keyframes slideUp {
   from {
     transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
     opacity: 0;
   }
 

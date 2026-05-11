@@ -52,6 +52,7 @@ function Login() {
         localStorage.setItem("userEmail", data.email); // Store email for password change
         localStorage.setItem("userRole", data.role); // Store role
         localStorage.setItem("jwtToken", data.token); // Store token
+        localStorage.setItem("adminActiveTab", "appointments"); // Reset to dashboard on login
         navigate("/dashboard");
       } else {
         alert(data.message || "Invalid credentials");

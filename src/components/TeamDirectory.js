@@ -1,5 +1,7 @@
 import React from "react";
 import API_BASE_URL from "../apiConfig";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const renderStaffSummary = (data) => {
     const total = data.length;
@@ -56,7 +58,7 @@ function TeamDirectory({ staffMembers, onBack, staffSearch, setStaffSearch, refr
     const filteredStaff = staffMembers.filter(s => {
         const matchSearch = (s.name || "").toLowerCase().includes(staffSearch.toLowerCase()) ||
             (s.email || "").toLowerCase().includes(staffSearch.toLowerCase()) ||
-            (s.phoneNumber || "").toLowerCase().includes(staffSearch.toLowerCase());
+            (s.phone_number || "").toLowerCase().includes(staffSearch.toLowerCase());
 
         let matchCategory = true;
         if (activeCategory === "doctors") matchCategory = s.role === "DOCTOR";
@@ -134,7 +136,30 @@ function TeamDirectory({ staffMembers, onBack, staffSearch, setStaffSearch, refr
         return name.substring(0, 2).toUpperCase();
     };
 
-    // formatDate removed as it was unused
+    const exportToPDF = (members) => {
+        const doc = new jsPDF();
+        const tableData = members.map(m => [m.name, m.role, m.email, m.phone_number]);
+        autoTable(doc, {
+            head: [['Name', 'Role', 'Email', 'Phone']],
+            body: tableData,
+        });
+        doc.save(`Staff_List_${new Date().getTime()}.pdf`);
+    };
+
+    const handleShare = (members, platform) => {
+        const member = Array.isArray(members) ? members[0] : members;
+        const shareText = `Sai Hospital Staff Member: 
+Name: ${member.name}
+Role: ${member.role}
+Email: ${member.email}
+Phone: ${member.phone_number || "N/A"}`;
+
+        if (platform === 'whatsapp') {
+            window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
+        } else if (platform === 'sms') {
+            window.open(`sms:?body=${encodeURIComponent(shareText)}`);
+        }
+    };
 
     return (
         <div className="team-directory-wrapper">
@@ -212,13 +237,13 @@ function TeamDirectory({ staffMembers, onBack, staffSearch, setStaffSearch, refr
                                 <div className="staff-detail-group">
                                     <span className="staff-detail-label">Contact</span>
                                     <span className="staff-detail-value"><i className="fa-solid fa-envelope"></i> {staff.email}</span>
-                                    <span className="staff-detail-value"><i className="fa-solid fa-phone"></i> {staff.phoneNumber}</span>
+                                    <span className="staff-detail-value"><i className="fa-solid fa-phone"></i> {staff.phone_number}</span>
                                 </div>
                                 <div className="staff-detail-group">
                                     <span className="staff-detail-label">Live Status</span>
                                     <span className="staff-detail-value">
-                                        <div className={`status-dot ${staff.lastLogin && (!staff.lastLogout || new Date(staff.lastLogin) > new Date(staff.lastLogout)) ? 'active' : 'inactive'}`} style={{ position: 'static', display: 'inline-block' }}></div>
-                                        {staff.lastLogin && (!staff.lastLogout || new Date(staff.lastLogin) > new Date(staff.lastLogout)) ? 'Online Now' : 'Offline'}
+                                        <div className={`status-dot ${staff.last_login && (!staff.last_logout || new Date(staff.last_login) > new Date(staff.last_logout)) ? 'active' : 'inactive'}`} style={{ position: 'static', display: 'inline-block' }}></div>
+                                        {staff.last_login && (!staff.last_logout || new Date(staff.last_login) > new Date(staff.last_logout)) ? 'Online Now' : 'Offline'}
                                     </span>
                                 </div>
                             </div>
@@ -242,9 +267,46 @@ function TeamDirectory({ staffMembers, onBack, staffSearch, setStaffSearch, refr
             {selectedIds.length > 0 && (
                 <div className="bulk-action-bar">
                     <span className="selection-count">{selectedIds.length} members selected</span>
+                    
+                    <button
+                        className="bulk-pdf-btn"
+                        onClick={() => {
+                            const selectedMembers = filteredStaff.filter(s => selectedIds.includes(s.id));
+                            exportToPDF(selectedMembers);
+                        }}
+                        style={{ background: '#4356c4', color: 'white' }}
+                    >
+                        <i className="fa-solid fa-file-pdf"></i> Download PDF
+                    </button>
+
+                    <button
+                        className="bulk-share-btn"
+                        onClick={() => {
+                            const selectedMembers = filteredStaff.filter(s => selectedIds.includes(s.id));
+                            handleShare(selectedMembers, 'whatsapp');
+                        }}
+                        style={{ background: '#25d366', color: 'white' }}
+                        title="Share on WhatsApp"
+                    >
+                        <i className="fa-brands fa-whatsapp"></i>
+                    </button>
+
+                    <button
+                        className="bulk-share-btn"
+                        onClick={() => {
+                            const selectedMembers = filteredStaff.filter(s => selectedIds.includes(s.id));
+                            handleShare(selectedMembers, 'sms');
+                        }}
+                        style={{ background: '#3b82f6', color: 'white' }}
+                        title="Share via SMS"
+                    >
+                        <i className="fa-solid fa-comment-sms"></i>
+                    </button>
+
                     <button className="bulk-delete-btn" onClick={handleBulkDelete}>
                         <i className="fa-solid fa-trash"></i> Delete Selected
                     </button>
+                    
                     <button className="global-back-btn" onClick={() => setSelectedIds([])}>
                         <i className="fa-solid fa-xmark"></i> <span>Cancel</span>
                     </button>

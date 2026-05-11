@@ -15,6 +15,11 @@ function Dashboard() {
   const userRole = localStorage.getItem("userRole") || "DOCTOR"; // Default to DOCTOR or just ""
   // Read active tab from localStorage if it exists, default to 'appointments'
   const [activePage, setActivePage] = useState(localStorage.getItem("adminActiveTab") || "appointments");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activePage]);
+
   const [appointments, setAppointments] = useState([]);
   const [staffMembers, setStaffMembers] = useState([]);
   const [staffSearch, setStaffSearch] = useState("");
@@ -1639,7 +1644,7 @@ Date: ${formatDate(record.appointmentDate)}`;
               </button>
             </>
           )}
-          {activePage !== "appointments_all" && activePage !== "appointments_completed" && (
+          {activePage !== "appointments_all" && (
             <button className="bulk-delete-btn" onClick={(e) => { e.stopPropagation(); handleBulkDelete(); }}>
               <i className="fa-solid fa-trash"></i> Delete Selected
             </button>
