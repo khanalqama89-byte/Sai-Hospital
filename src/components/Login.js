@@ -75,6 +75,7 @@ function Login({ setIsLoading }) {
       return;
     }
 
+    setLoading(true);
     if (setIsLoading) setIsLoading(true);
 
     try {
@@ -85,6 +86,7 @@ function Login({ setIsLoading }) {
       });
 
       const data = await response.json();
+      setLoading(false);
       if (setIsLoading) setIsLoading(false);
 
       if (response.ok && data.success) {
@@ -94,6 +96,7 @@ function Login({ setIsLoading }) {
         alert(data.message || "Failed to send reset link");
       }
     } catch (err) {
+      setLoading(false);
       if (setIsLoading) setIsLoading(false);
       console.error("Forgot password error:", err);
       alert("Failed to connect to the server.");
@@ -107,6 +110,7 @@ function Login({ setIsLoading }) {
       return;
     }
 
+    setLoading(true);
     if (setIsLoading) setIsLoading(true);
 
     try {
@@ -121,6 +125,7 @@ function Login({ setIsLoading }) {
       });
 
       const data = await response.json();
+      setLoading(false);
       if (setIsLoading) setIsLoading(false);
 
       if (response.ok && data.success) {

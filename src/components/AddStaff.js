@@ -23,6 +23,7 @@ function AddStaff({ onBack, refreshStaff, setIsLoading }) {
         e.preventDefault();
         setSuccessMsg("");
         setErrorMsg("");
+        setLoading(true);
         if (setIsLoading) setIsLoading(true);
 
         try {
@@ -35,6 +36,7 @@ function AddStaff({ onBack, refreshStaff, setIsLoading }) {
             });
 
             const data = await response.json();
+            setLoading(false);
             if (setIsLoading) setIsLoading(false);
 
             if (response.ok && data.success) {
@@ -45,6 +47,7 @@ function AddStaff({ onBack, refreshStaff, setIsLoading }) {
                 setErrorMsg(data.message || "Registration failed");
             }
         } catch (err) {
+            setLoading(false);
             if (setIsLoading) setIsLoading(false);
             console.error("Signup error:", err);
             setErrorMsg("Failed to connect to the server.");

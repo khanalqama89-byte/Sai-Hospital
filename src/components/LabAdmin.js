@@ -165,7 +165,7 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
           gender: formData.gender,
           age: formData.age ? parseInt(formData.age, 10) : null,
           date: combinedDateTime,
-          reportStatus: records.find(r => r.id === editingRecordId)?.reportStatus || "PENDING"
+          reportStatus: records.find(r => r.id === editingRecordId)?.report_status || "PENDING"
         };
         response = await fetch(`${API_BASE_URL}/api/lab-records/${editingRecordId}`, {
           method: "PUT",
@@ -264,7 +264,7 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
 
   const handleShare = async (records, platform) => {
     const record = Array.isArray(records) ? records[0] : records;
-    const shareText = `Sai Hospital Lab Report: \nPatient: ${record.name}\nTests: ${record.test}\nDate: ${formatDate(record.date)}\nStatus: ${record.reportStatus}`;
+    const shareText = `Sai Hospital Lab Report: \nPatient: ${record.name}\nTests: ${record.test}\nDate: ${formatDate(record.date)}\nStatus: ${record.report_status}`;
 
     if (platform === 'whatsapp') {
       window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
@@ -400,12 +400,12 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
     const matchSearch = (r.name || "").toLowerCase().includes(recordSearch.toLowerCase()) ||
       (r.test || "").toLowerCase().includes(recordSearch.toLowerCase());
     const matchDate = recordDate ? r.date === recordDate : true;
-    const matchStatus = statusFilter ? r.reportStatus === statusFilter : true;
+    const matchStatus = statusFilter ? r.report_status === statusFilter : true;
     return matchSearch && matchDate && matchStatus;
   });
 
-  const completedCount = records.filter(r => r.reportStatus === "COMPLETE").length;
-  const pendingCount = records.filter(r => r.reportStatus === "PENDING").length;
+  const completedCount = records.filter(r => r.report_status === "COMPLETE").length;
+  const pendingCount = records.filter(r => r.report_status === "PENDING").length;
 
   return (
     <div className="lab-admin-page">
@@ -766,7 +766,7 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
 
                       <div className="app-card-status">
                         <span className="status completed">
-                          {record.reportStatus || "COMPLETED"}
+                          {record.report_status || "COMPLETED"}
                         </span>
                       </div>
 
@@ -789,8 +789,8 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
                       </div>
                       <div className="u-card-header">
                         <div className="u-card-avatar" style={{
-                          background: record.reportStatus === 'COMPLETE' ? '#dcfce7' : '#e0e7ff',
-                          color: record.reportStatus === 'COMPLETE' ? '#16a34a' : '#4f46e5'
+                          background: record.report_status === 'COMPLETE' ? '#dcfce7' : '#e0e7ff',
+                          color: record.report_status === 'COMPLETE' ? '#16a34a' : '#4f46e5'
                         }}>
                           {getInitials(record.name)}
                         </div>
@@ -798,7 +798,7 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
                           <h3>{record.name}</h3>
                           <span className="u-card-badge">{record.age}Y • {record.gender}</span>
                         </div>
-                        <div className={`u-card-status-dot ${record.reportStatus === 'COMPLETE' ? 'active' : ''}`}></div>
+                        <div className={`u-card-status-dot ${record.report_status === 'COMPLETE' ? 'active' : ''}`}></div>
                       </div>
 
                       <div className="u-card-info-box">
@@ -824,14 +824,14 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
                           </div>
                           <div className="u-footer-col">
                             <span className="u-footer-label">Status</span>
-                            <span className={`u-footer-value ${record.reportStatus === 'COMPLETE' ? 'success' : ''}`}>
-                              {record.reportStatus || "PENDING"}
+                            <span className={`u-footer-value ${record.report_status === 'COMPLETE' ? 'success' : ''}`}>
+                              {record.report_status || "PENDING"}
                             </span>
                           </div>
                         </div>
 
                         <div className="u-card-actions">
-                          {record.reportStatus !== "COMPLETE" ? (
+                          {record.report_status !== "COMPLETE" ? (
                             <button
                               className="u-action-btn discharge"
                               style={{ background: '#dcfce7', color: '#16a34a' }}
@@ -842,7 +842,7 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
                             </button>
                           ) : null}
                           <div className="u-actions-group">
-                            {record.reportStatus !== "COMPLETE" && (
+                            {record.report_status !== "COMPLETE" && (
                               <button className="u-action-btn edit" onClick={(e) => { e.stopPropagation(); handleEdit(record); }} title="Edit">
                                 <i className="fa-solid fa-pen"></i>
                               </button>
