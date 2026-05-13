@@ -56,15 +56,13 @@ function AddStaff({ onBack, refreshStaff, setIsLoading }) {
 
     return (
         <div className="add-staff-container">
-            <div className="directory-header" style={{ marginBottom: '30px' }}>
-                <div className="header-left">
-                    <button className="global-back-btn" onClick={onBack}>
-                        <i className="fa-solid fa-arrow-left"></i> Back
-                    </button>
-                    <div className="title-group">
-                        <h2>Add New Staff</h2>
-                        <p>Register hospital personnel into the clinical management system</p>
-                    </div>
+            <div className="directory-header" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', marginBottom: '30px', minHeight: '50px' }}>
+                <button className="global-back-btn" onClick={onBack} style={{ position: 'absolute', left: 0 }}>
+                    <i className="fa-solid fa-arrow-left"></i> Back
+                </button>
+                <div className="title-group" style={{ textAlign: 'center' }}>
+                    <h2 style={{ margin: 0 }}>Add New Staff</h2>
+                    <p style={{ margin: '5px 0 0 0' }}>Register hospital personnel into the clinical management system</p>
                 </div>
             </div>
 

@@ -319,14 +319,23 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
   const handleDeliver = async (record) => {
     try {
       const token = localStorage.getItem("jwtToken");
-      const updatedRecord = { ...record, reportStatus: "COMPLETE" };
+      const recordPayload = {
+        test: record.test,
+        name: record.name,
+        address: record.address,
+        contact: record.contact,
+        gender: record.gender,
+        age: record.age,
+        date: record.date,
+        reportStatus: "COMPLETE"
+      };
       const res = await fetch(`${API_BASE_URL}/api/lab-records/${record.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify(updatedRecord)
+        body: JSON.stringify(recordPayload)
       });
       if (res.ok) {
         fetchRecords();

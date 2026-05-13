@@ -365,13 +365,11 @@ function IpdAdmin({ onBack, activeSubTab, setIsLoading }) {
             {/* NEW ADMISSION FORM - Dedicated View */}
             {activeSubTab === "ipd_new" && (
                 <div className="ipd-section" style={{ marginBottom: '60px' }}>
-                    <div className="ipd-section-header">
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                            <button className="global-back-btn" onClick={onBack} style={{ margin: 0, padding: '8px 15px' }}>
-                                <i className="fa-solid fa-arrow-left"></i> Back
-                            </button>
-                            <h2><i className="fa-solid fa-user-plus" style={{ color: 'var(--primary)' }}></i> Admit New Patient</h2>
-                        </div>
+                    <div className="ipd-section-header" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', minHeight: '50px' }}>
+                        <button className="global-back-btn" onClick={onBack} style={{ position: 'absolute', left: 0, margin: 0, padding: '8px 15px' }}>
+                            <i className="fa-solid fa-arrow-left"></i> Back
+                        </button>
+                        <h2 style={{ margin: 0 }}><i className="fa-solid fa-user-plus" style={{ color: 'var(--primary)' }}></i> Admit New Patient</h2>
                     </div>
 
                     <div className="ipd-form-container">
