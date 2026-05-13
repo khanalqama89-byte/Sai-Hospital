@@ -326,7 +326,7 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
         contact: record.contact,
         gender: record.gender,
         age: record.age,
-        date: record.date,
+        date: record.date ? record.date.split('T')[0] : null,
         reportStatus: "COMPLETE"
       };
       const res = await fetch(`${API_BASE_URL}/api/lab-records/${record.id}`, {
