@@ -148,7 +148,7 @@ function TeamDirectory({ staffMembers, onBack, staffSearch, setStaffSearch, refr
 
     const handleShare = (members, platform) => {
         const member = Array.isArray(members) ? members[0] : members;
-        const shareText = `Sai Hospital Staff Member: 
+        const shareText = `Sai Homoeopathic Clinic And Multispeciality Centre Staff Member: 
 Name: ${member.name}
 Role: ${member.role}
 Email: ${member.email}
@@ -267,7 +267,7 @@ Phone: ${member.phone_number || "N/A"}`;
             {selectedIds.length > 0 && (
                 <div className="bulk-action-bar">
                     <span className="selection-count">{selectedIds.length} members selected</span>
-                    
+
                     <button
                         className="bulk-pdf-btn"
                         onClick={() => {
@@ -306,7 +306,7 @@ Phone: ${member.phone_number || "N/A"}`;
                     <button className="bulk-delete-btn" onClick={handleBulkDelete}>
                         <i className="fa-solid fa-trash"></i> Delete Selected
                     </button>
-                    
+
                     <button className="global-back-btn" onClick={() => setSelectedIds([])}>
                         <i className="fa-solid fa-xmark"></i> <span>Cancel</span>
                     </button>

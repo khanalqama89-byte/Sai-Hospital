@@ -231,7 +231,7 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
     const doc = new jsPDF();
     doc.setFontSize(20);
     doc.setTextColor(67, 86, 196);
-    doc.text("Sai Hospital - Lab Reports", 15, 20);
+    doc.text("Sai Homoeopathic Clinic And Multispeciality Centre - Lab Reports", 15, 20);
     doc.setFontSize(10);
     doc.setTextColor(100);
     doc.text(`Generated on: ${new Date().toLocaleString()}`, 15, 28);
@@ -264,7 +264,7 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
 
   const handleShare = async (records, platform) => {
     const record = Array.isArray(records) ? records[0] : records;
-    const shareText = `Sai Hospital Lab Report: \nPatient: ${record.name}\nTests: ${record.test}\nDate: ${formatDate(record.date)}\nStatus: ${record.report_status}`;
+    const shareText = `Sai Homoeopathic Clinic And Multispeciality Centre Lab Report: \nPatient: ${record.name}\nTests: ${record.test}\nDate: ${formatDate(record.date)}\nStatus: ${record.report_status}`;
 
     if (platform === 'whatsapp') {
       window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
@@ -276,7 +276,7 @@ function LabAdmin({ onBack, activeSubTab, setIsLoading }) {
       if (navigator.share) {
         try {
           await navigator.share({
-            title: 'Lab Report - Sai Hospital',
+            title: 'Lab Report - Sai Homoeopathic Clinic And Multispeciality Centre',
             text: shareText,
           });
         } catch (err) {

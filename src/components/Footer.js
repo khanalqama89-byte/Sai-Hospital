@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer className="footer">
-      <p>© 2026 Sai Hospital. All Rights Reserved.</p>
+      <p>© 2026 Sai Homoeopathic Clinic And Multispeciality Centre. All Rights Reserved.</p>
     </footer>
   );
 }

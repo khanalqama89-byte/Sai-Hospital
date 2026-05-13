@@ -28,10 +28,10 @@ function Home() {
 
       <div className="home-hero-modern" style={{ backgroundImage: 'none', backgroundColor: '#f8fafc', padding: '60px 20px' }}>
         <div className="hero-content-modern" style={{ maxWidth: '1000px' }}>
-          <h1 style={{ color: '#1e293b' }}>Welcome to <span className="highlight-text">Sai Hospital</span></h1>
+          <h1 style={{ color: '#1e293b' }}>Welcome to <span className="highlight-text">Sai Homoeopathic Clinic And Multispeciality Centre</span></h1>
           <span className="hero-badge">Caring for Life</span>
           <p style={{ color: '#64748b', marginBottom: '30px' }}>Experience advanced medical care with our trusted specialists and state-of-the-art facilities. Your health is our priority.</p>
-          
+
           <div style={{ width: 'calc(100% + 40px)', marginLeft: '-20px', marginRight: '-20px', marginBottom: '40px' }}>
             <img src={homepageBg} alt="Reception" style={{ width: '100%', borderRadius: '0' }} />
           </div>

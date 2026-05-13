@@ -9,16 +9,16 @@ function About() {
         <button
           onClick={() => navigate(-1)}
           className="global-back-btn"
-          style={{ 
-            position: 'absolute', 
-            top: '20px', 
+          style={{
+            position: 'absolute',
+            top: '20px',
             left: '30px'
           }}
         >
           ← Back
         </button>
         <div className="about-hero-content">
-          <h1>About Sai Hospital</h1>
+          <h1>About Sai Homoeopathic Clinic And Multispeciality Centre</h1>
           <p>Committed to providing world-class healthcare with compassion, excellence, and innovation.</p>
         </div>
       </div>
@@ -29,7 +29,7 @@ function About() {
         <div className="about-mission-section">
           <h2>Our Mission</h2>
           <p>
-            At Sai Hospital, our mission is to improve the health and well-being of the communities we serve by providing high-quality, patient-centered care. We believe that everyone deserves access to state-of-the-art medical facilities and experienced, compassionate doctors. From routine check-ups to complex surgeries, we are here to support your journey to better health.
+            At Sai Homoeopathic Clinic And Multispeciality Centre, our mission is to improve the health and well-being of the communities we serve by providing high-quality, patient-centered care. We believe that everyone deserves access to state-of-the-art medical facilities and experienced, compassionate doctors. From routine check-ups to complex surgeries, we are here to support your journey to better health.
           </p>
         </div>
 

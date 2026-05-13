@@ -300,7 +300,7 @@ function IpdAdmin({ onBack, activeSubTab, setIsLoading }) {
         const doc = new jsPDF();
         doc.setFontSize(20);
         doc.setTextColor(67, 86, 196);
-        doc.text("Sai Hospital - IPD Records", 15, 20);
+        doc.text("Sai Homoeopathic Clinic And Multispeciality Centre - IPD Records", 15, 20);
         doc.setFontSize(10);
         doc.setTextColor(100);
         doc.text(`Generated on: ${new Date().toLocaleString()}`, 15, 28);
@@ -334,7 +334,7 @@ function IpdAdmin({ onBack, activeSubTab, setIsLoading }) {
 
     const handleShare = async (records, platform) => {
         const record = Array.isArray(records) ? records[0] : records;
-        const shareText = `Sai Hospital IPD Report: \nPatient: ${record.patientName}\nDisease: ${record.disease}\nStatus: ${record.status === 'ADMITTED' ? 'Admitted' : 'Discharged'}\nAdmission: ${formatDate(record.admissionDate)}`;
+        const shareText = `Sai Homoeopathic Clinic And Multispeciality Centre IPD Report: \nPatient: ${record.patientName}\nDisease: ${record.disease}\nStatus: ${record.status === 'ADMITTED' ? 'Admitted' : 'Discharged'}\nAdmission: ${formatDate(record.admissionDate)}`;
 
         if (platform === 'whatsapp') {
             window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
@@ -346,7 +346,7 @@ function IpdAdmin({ onBack, activeSubTab, setIsLoading }) {
             if (navigator.share) {
                 try {
                     await navigator.share({
-                        title: 'IPD Record - Sai Hospital',
+                        title: 'IPD Record - Sai Homoeopathic Clinic And Multispeciality Centre',
                         text: shareText,
                     });
                 } catch (err) {

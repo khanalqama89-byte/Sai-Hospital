@@ -104,7 +104,7 @@ function Dashboard({ setIsLoading }) {
     // Add Hospital Header
     doc.setFontSize(20);
     doc.setTextColor(67, 86, 196); // Indigo
-    doc.text("Sai Hospital - Appointment Records", 15, 20);
+    doc.text("Sai Homoeopathic Clinic And Multispeciality Centre - Appointment Records", 15, 20);
     doc.setFontSize(10);
     doc.setTextColor(100);
     doc.text(`Generated on: ${new Date().toLocaleString()}`, 15, 28);
@@ -138,7 +138,7 @@ function Dashboard({ setIsLoading }) {
 
   const handleShare = async (records, platform) => {
     const record = Array.isArray(records) ? records[0] : records;
-    const shareText = `Sai Hospital Report: 
+    const shareText = `Sai Homoeopathic Clinic And Multispeciality Centre Report: 
 Patient: ${record.fullName || record.name}
 Disease: ${record.disease}
 Status: ${record.visitStatus === "COMPLETED" ? "VISITED/COMPLETED" : record.status}
@@ -155,7 +155,7 @@ Date: ${formatDate(record.appointmentDate)}`;
       if (navigator.share) {
         try {
           await navigator.share({
-            title: 'Patient Record - Sai Hospital',
+            title: 'Patient Record - Sai Homoeopathic Clinic And Multispeciality Centre',
             text: shareText,
           });
         } catch (err) {
@@ -1124,7 +1124,7 @@ Date: ${formatDate(record.appointmentDate)}`;
               <div className="dashboard-hero">
                 <div className="hero-content">
                   <h1>Welcome back, {userName}!</h1>
-                  <p>Here's what's happening at Sai Hospital today.</p>
+                  <p>Here's what's happening at Sai Homoeopathic Clinic And Multispeciality Centre today.</p>
                 </div>
                 <div className="hero-stats">
                   <span className="live-time">{formatTimeLong(currentTime)}</span>
@@ -1471,7 +1471,7 @@ Date: ${formatDate(record.appointmentDate)}`;
       <div className="mobile-admin-header">
         <h2 className="logo" style={{ color: 'var(--primary)', margin: 0, fontSize: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <img src={hospitalLogo} alt="Logo" style={{ height: '30px' }} />
-          <span>Sai Hospital</span>
+          <span>Sai Homoeopathic Clinic And Multispeciality Centre</span>
         </h2>
         <button className="mobile-menu-btn" onClick={() => setIsMobileSidebarOpen(true)}>
           <i className="fa-solid fa-bars"></i>
@@ -1489,7 +1489,7 @@ Date: ${formatDate(record.appointmentDate)}`;
         </button>
         <h2 className="sidebar-logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <img src={hospitalLogo} alt="Logo" style={{ height: '40px' }} />
-          <span>Sai Hospital</span>
+          <span>Sai Homoeopathic Clinic And Multispeciality Centre</span>
         </h2>
         <nav className="hierarchical-nav">
           <div className="nav-group">

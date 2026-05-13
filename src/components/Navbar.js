@@ -19,7 +19,7 @@ function Navbar() {
       <Link to="/" style={{ textDecoration: "none", color: "inherit" }} onClick={closeMenu}>
         <h2 className="logo" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <img src={hospitalLogo} alt="Logo" style={{ height: "40px" }} />
-          <span>Sai Hospital</span>
+          <span>Sai Homoeopathic Clinic And Multispeciality Centre</span>
         </h2>
       </Link>
 

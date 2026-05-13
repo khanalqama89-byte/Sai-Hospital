@@ -85,7 +85,7 @@ function Signup() {
 
       {/* HEADER */}
       <header className="admin-header">
-        <div className="logo">Sai Hospital</div>
+        <div className="logo">Sai Homoeopathic Clinic And Multispeciality Centre</div>
         <nav className="header-links">
           <a href="/">Home</a>
         </nav>
@@ -148,7 +148,7 @@ function Signup() {
                     onChange={handleChange}
                     required
                   />
-                  <span 
+                  <span
                     className="password-toggle-text"
                     onClick={() => setShowPassword(!showPassword)}
                   >

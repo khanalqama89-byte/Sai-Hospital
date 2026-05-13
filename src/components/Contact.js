@@ -10,9 +10,9 @@ function Contact() {
         <button
           onClick={() => navigate(-1)}
           className="global-back-btn"
-          style={{ 
-            position: 'absolute', 
-            top: '20px', 
+          style={{
+            position: 'absolute',
+            top: '20px',
             left: '30px'
           }}
         >
@@ -74,7 +74,7 @@ function Contact() {
         {/* RIGHT SIDE - GOOGLE MAP */}
         <div className="map-card-modern">
           <iframe
-            title="Sai Hospital Location"
+            title="Sai Sai Homoeopathic Clinic And Multispeciality Centre Location"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15064.085023414!2d73.05!3d19.23!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDEzJzQ4LjAiTiA3M8KwMDMnMDAuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin&q=Sai+Hospital+Bhiwandi+Maharashtra"
             allowFullScreen=""
             loading="lazy"
