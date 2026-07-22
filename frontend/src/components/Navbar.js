@@ -16,11 +16,13 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/" style={{ textDecoration: "none", color: "inherit" }} onClick={closeMenu}>
-        <h2 className="logo" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <img src={hospitalLogo} alt="Logo" style={{ height: "40px" }} />
-          <span>Sai Homoeopathic Clinic And Multispeciality Centre</span>
-        </h2>
+      <Link to="/" className="navbar-brand-link" onClick={closeMenu}>
+        <div className="hospital-brand">
+          <img src={hospitalLogo} alt="Sai Hospital Logo" className="hospital-brand-logo" />
+          <span className="hospital-brand-title">
+            Sai Homoeopathic Clinic And Multispeciality Centre
+          </span>
+        </div>
       </Link>
 
       <div className={`hamburger ${isOpen ? "active" : ""}`} onClick={toggleMenu}>

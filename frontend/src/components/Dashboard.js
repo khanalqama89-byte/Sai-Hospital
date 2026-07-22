@@ -1469,10 +1469,10 @@ Date: ${formatDate(record.appointmentDate)}`;
     <div className="admin-layout">
       {/* Mobile Top Bar */}
       <div className="mobile-admin-header">
-        <h2 className="logo" style={{ color: 'var(--primary)', margin: 0, fontSize: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <img src={hospitalLogo} alt="Logo" style={{ height: '30px' }} />
-          <span>Sai Homoeopathic Clinic And Multispeciality Centre</span>
-        </h2>
+        <div className="hospital-brand" style={{ color: 'var(--primary)' }}>
+          <img src={hospitalLogo} alt="Sai Hospital Logo" className="hospital-brand-logo" />
+          <span className="hospital-brand-title">Sai Homoeopathic Clinic And Multispeciality Centre</span>
+        </div>
         <button className="mobile-menu-btn" onClick={() => setIsMobileSidebarOpen(true)}>
           <i className="fa-solid fa-bars"></i>
         </button>
@@ -1487,10 +1487,10 @@ Date: ${formatDate(record.appointmentDate)}`;
         <button className="mobile-close-btn" onClick={() => setIsMobileSidebarOpen(false)}>
           <i className="fa-solid fa-xmark"></i>
         </button>
-        <h2 className="sidebar-logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <img src={hospitalLogo} alt="Logo" style={{ height: '40px' }} />
-          <span>Sai Homoeopathic Clinic And Multispeciality Centre</span>
-        </h2>
+        <div className="hospital-brand sidebar-brand">
+          <img src={hospitalLogo} alt="Sai Hospital Logo" className="hospital-brand-logo" />
+          <span className="hospital-brand-title">Sai Homoeopathic Clinic And Multispeciality Centre</span>
+        </div>
         <nav className="hierarchical-nav">
           <div className="nav-group">
             <a href="#!" onClick={() => handleNavClick("appointments")} className={activePage === "appointments" ? "active" : ""}>

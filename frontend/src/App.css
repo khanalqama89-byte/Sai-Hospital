@@ -6305,3 +6305,130 @@ button {
   font-weight: 600;
   font-size: 1.1rem;
 }
+
+/* ========================================================== */
+/* UNIFIED HOSPITAL BRAND & LOGO ALIGNMENT SYSTEM             */
+/* Supports Mobile, Tablet, Laptop, and Desktop Screens       */
+/* ========================================================== */
+
+.hospital-brand {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  line-height: 1.25 !important;
+  box-sizing: border-box !important;
+}
+
+.navbar-brand-link {
+  display: flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
+}
+
+.hospital-brand-logo {
+  height: 40px !important;
+  width: auto !important;
+  max-width: 44px !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  vertical-align: middle !important;
+}
+
+.hospital-brand-title {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.3px !important;
+  color: inherit !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  vertical-align: middle !important;
+}
+
+.mobile-admin-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 16px !important;
+  background: white !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.sidebar-brand {
+  padding: 16px 20px !important;
+  margin-bottom: 12px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ---------------------------------------------------------- */
+/* Responsive Adjustments across Devices                     */
+/* ---------------------------------------------------------- */
+
+/* Large Desktop (> 1200px) */
+@media (min-width: 1200px) {
+  .hospital-brand-title {
+    font-size: 1.2rem !important;
+  }
+  .hospital-brand-logo {
+    height: 42px !important;
+  }
+}
+
+/* Laptops / Tablets (768px - 1199px) */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .hospital-brand {
+    gap: 10px !important;
+  }
+  .hospital-brand-title {
+    font-size: 1.02rem !important;
+  }
+  .hospital-brand-logo {
+    height: 36px !important;
+  }
+}
+
+/* Mobile Devices (< 768px) */
+@media (max-width: 767px) {
+  .navbar {
+    padding: 10px 16px !important;
+  }
+  .hospital-brand {
+    gap: 8px !important;
+  }
+  .hospital-brand-title {
+    font-size: 0.9rem !important;
+    line-height: 1.2 !important;
+  }
+  .hospital-brand-logo {
+    height: 32px !important;
+  }
+}
+
+/* Small Mobile (< 480px) */
+@media (max-width: 479px) {
+  .hospital-brand {
+    gap: 6px !important;
+  }
+  .hospital-brand-title {
+    font-size: 0.82rem !important;
+    line-height: 1.18 !important;
+  }
+  .hospital-brand-logo {
+    height: 28px !important;
+  }
+}

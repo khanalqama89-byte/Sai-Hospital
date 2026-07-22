@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API_BASE_URL from "../apiConfig";
+import hospitalLogo from "../assets/hospital_logo.png";
 
 function Signup() {
   const navigate = useNavigate();
@@ -85,7 +86,10 @@ function Signup() {
 
       {/* HEADER */}
       <header className="admin-header">
-        <div className="logo">Sai Homoeopathic Clinic And Multispeciality Centre</div>
+        <div className="hospital-brand">
+          <img src={hospitalLogo} alt="Sai Hospital Logo" className="hospital-brand-logo" />
+          <span className="hospital-brand-title">Sai Homoeopathic Clinic And Multispeciality Centre</span>
+        </div>
         <nav className="header-links">
           <a href="/">Home</a>
         </nav>
