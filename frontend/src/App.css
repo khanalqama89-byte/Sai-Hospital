@@ -1387,21 +1387,27 @@ button {
 
 .secondary-btn-large {
   padding: 16px 32px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #ffffff;
+  color: #3b52c4;
+  border: 2px solid #3b52c4;
   border-radius: 12px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(59, 82, 196, 0.12);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .secondary-btn-large:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #3b52c4;
+  color: #ffffff;
+  border-color: #3b52c4;
   transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(59, 82, 196, 0.25);
 }
 
 /* Treatment Section */
