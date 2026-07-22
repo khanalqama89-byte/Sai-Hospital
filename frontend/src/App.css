@@ -5915,21 +5915,26 @@ button {
   .appointment-card-horizontal {
     flex-direction: column !important;
     align-items: flex-start !important;
-    padding: 6px 10px !important; /* Ultra micro padding */
-    gap: 4px !important; /* Tightest gap */
+    padding: 6px 10px !important;
+    /* Ultra micro padding */
+    gap: 4px !important;
+    /* Tightest gap */
     border-radius: 10px !important;
-    margin-bottom: 8px !important; /* Less space between cards */
+    margin-bottom: 8px !important;
+    /* Less space between cards */
   }
 
   .app-card-avatar {
-    width: 28px !important; /* Micro avatar */
+    width: 28px !important;
+    /* Micro avatar */
     height: 28px !important;
     font-size: 12px !important;
     border-radius: 6px !important;
   }
 
   .app-card-info h3 {
-    font-size: 13.5px !important; /* Slightly smaller name */
+    font-size: 13.5px !important;
+    /* Slightly smaller name */
     margin: 0 !important;
   }
 
@@ -5947,7 +5952,8 @@ button {
 
   .app-card-details {
     width: 100% !important;
-    gap: 3px !important; /* Micro gap */
+    gap: 3px !important;
+    /* Micro gap */
     display: flex !important;
     flex-direction: column !important;
   }
@@ -5998,7 +6004,8 @@ button {
     justify-content: center !important;
     flex: none !important;
     border-radius: 8px !important;
-    font-size: 0 !important; /* Hide direct text */
+    font-size: 0 !important;
+    /* Hide direct text */
   }
 
   .app-card-actions button i {
@@ -6033,7 +6040,8 @@ button {
 
   .bulk-action-bar button,
   .bulk-action-bar .global-back-btn {
-    width: 34px !important; /* Slightly larger for better tap */
+    width: 34px !important;
+    /* Slightly larger for better tap */
     height: 34px !important;
     min-width: 34px !important;
     max-width: 34px !important;
@@ -6054,9 +6062,11 @@ button {
   }
 
   .bulk-action-bar button i {
-    font-size: 14px !important; /* Slightly larger icons */
+    font-size: 14px !important;
+    /* Slightly larger icons */
     margin: 0 !important;
-    color: white !important; /* Most action icons are white */
+    color: white !important;
+    /* Most action icons are white */
     display: block !important;
     visibility: visible !important;
   }
@@ -6065,9 +6075,10 @@ button {
   .bulk-action-bar .global-back-btn {
     background: #f1f5f9 !important;
   }
-  
+
   .bulk-action-bar .global-back-btn i {
-    color: #64748b !important; /* Darker icon for light cancel button */
+    color: #64748b !important;
+    /* Darker icon for light cancel button */
   }
 
   .universal-grid {
@@ -6390,6 +6401,7 @@ button {
   .hospital-brand-title {
     font-size: 1.2rem !important;
   }
+
   .hospital-brand-logo {
     height: 42px !important;
   }
@@ -6400,9 +6412,11 @@ button {
   .hospital-brand {
     gap: 10px !important;
   }
+
   .hospital-brand-title {
     font-size: 1.02rem !important;
   }
+
   .hospital-brand-logo {
     height: 36px !important;
   }
@@ -6413,13 +6427,16 @@ button {
   .navbar {
     padding: 10px 16px !important;
   }
+
   .hospital-brand {
     gap: 8px !important;
   }
+
   .hospital-brand-title {
     font-size: 0.9rem !important;
     line-height: 1.2 !important;
   }
+
   .hospital-brand-logo {
     height: 32px !important;
   }
@@ -6430,10 +6447,12 @@ button {
   .hospital-brand {
     gap: 6px !important;
   }
+
   .hospital-brand-title {
     font-size: 0.82rem !important;
     line-height: 1.18 !important;
   }
+
   .hospital-brand-logo {
     height: 28px !important;
   }
