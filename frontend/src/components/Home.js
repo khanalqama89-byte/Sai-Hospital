@@ -38,7 +38,23 @@ function Home() {
 
           <div className="hero-buttons">
             <button className="primary-btn-large" onClick={() => navigate("/symptoms")}>Assess Your Symptoms 🩺</button>
-            <button className="secondary-btn-large" onClick={() => document.querySelector('.treatment-section')?.scrollIntoView({ behavior: 'smooth' })}>Explore Services ↓</button>
+            <button
+              className="secondary-btn-large"
+              style={{
+                backgroundColor: '#2563eb',
+                color: '#ffffff',
+                border: '2px solid #2563eb',
+                padding: '14px 28px',
+                borderRadius: '12px',
+                fontSize: '16px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                boxShadow: '0 4px 14px rgba(37, 99, 235, 0.4)'
+              }}
+              onClick={() => document.querySelector('.treatment-section')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Explore Services ↓
+            </button>
           </div>
         </div>
       </div>
